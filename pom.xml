@@ -16,10 +16,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>fraud-detection</name>
 	<description>Cloud computing kafka project</description>
+
 	<modules>
 		<module>transaction-api</module>
         <module>fraud-detector</module>
+        <module>common</module>
     </modules>
+
 	<packaging>pom</packaging>
 
 	<properties>
