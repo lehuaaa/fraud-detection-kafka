@@ -1,0 +1,22 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
+    ssl:
+      trust-store-location: classpath:secrets/detector.truststore.jks
+      trust-store-password: ${TRUSTSTORE_PASSWORD}
+      key-store-location: classpath:secrets/detector.keystore.jks
+      key-store-password: ${KEYSTORE_PASSWORD}
+    properties:
+      security:
+        protocol: "SSL"
+      ssl:
+        endpoint:
+          identification:
+            algorithm: ""
+    consumer:
+      group-id: detector
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
