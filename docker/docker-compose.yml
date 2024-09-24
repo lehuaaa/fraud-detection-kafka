@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
 
   zookeeper:
@@ -86,3 +84,14 @@ services:
       - ./secrets/kafka-3:/var/private/ssl
     depends_on:
       - zookeeper
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: fraud-detection
+    ports:
+      - "5432:5432"
