@@ -1,10 +1,10 @@
 spring:
   kafka:
-    bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
+    bootstrap-servers: ${BOOTSTRAP_SERVERS}
     ssl:
-      trust-store-location: classpath:secrets/producer.truststore.jks
+      trust-store-location: ${TRUSTSTORE_LOCATION}
       trust-store-password: ${TRUSTSTORE_PASSWORD}
-      key-store-location: classpath:secrets/producer.keystore.jks
+      key-store-location: ${KEYSTORE_LOCATION}
       key-store-password: ${KEYSTORE_PASSWORD}
     properties:
       security:
