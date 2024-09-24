@@ -1,6 +1,7 @@
 package com.lehua.transaction_api.services;
 
-import com.lehua.common.dtos.TransactionDTO;
+
+import com.lehua.common.model.TransactionDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -13,23 +14,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class TransactionProducer {
 
-    private final KafkaTemplate<String, TransactionDTO> kafkaTemplate;
+    private final KafkaTemplate<String, TransactionDto> kafkaTemplate;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TransactionProducer.class);
 
-    public TransactionProducer(KafkaTemplate<String, TransactionDTO> kafkaTemplate) {
+    public TransactionProducer(KafkaTemplate<String, TransactionDto> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendMessage(TransactionDTO transaction) {
+    public void sendMessage(TransactionDto transaction) {
 
-        Message<TransactionDTO> message = MessageBuilder
+        Message<TransactionDto> message = MessageBuilder
                 .withPayload(transaction)
                 .setHeader(KafkaHeaders.TOPIC, "transactions")
                 .build();
 
         kafkaTemplate.send(message);
-
-        LOGGER.info("SENT TRANSACTION: " + transaction.toString());
+        LOGGER.info("Published transaction: " + transaction);
     }
 }

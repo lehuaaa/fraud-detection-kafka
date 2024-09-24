@@ -1,7 +1,7 @@
 package com.lehua.transaction_api.controllers;
 
 
-import com.lehua.common.dtos.TransactionDTO;
+import com.lehua.common.model.TransactionDto;
 import com.lehua.transaction_api.services.TransactionProducer;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<String> publishTransaction(@Valid @RequestBody TransactionDTO transaction) {
+    public ResponseEntity<String> publishTransaction(@Valid @RequestBody TransactionDto transaction) {
         transactionProducer.sendMessage(transaction);
         return new ResponseEntity<>("Transaction successfully published", HttpStatus.CREATED);
     }

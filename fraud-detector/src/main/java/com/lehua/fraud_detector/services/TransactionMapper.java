@@ -1,25 +1,25 @@
 package com.lehua.fraud_detector.services;
 
-import com.lehua.common.dtos.TransactionDTO;
+import com.lehua.common.model.TransactionDto;
 import com.lehua.fraud_detector.model.Transaction;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TransactionMapper {
 
-    public Transaction toTransaction(TransactionDTO transactionDTO) {
+    public Transaction toTransaction(TransactionDto transactionDto) {
 
-        if (transactionDTO == null)
+        if (transactionDto == null)
             throw new NullPointerException("transactionDTO is null");
 
         return Transaction.builder()
-                .id(transactionDTO.getId())
-                .senderAccountId(transactionDTO.getSenderAccountId())
-                .receiverAccountId(transactionDTO.getReceiverAccountId())
-                .amount(transactionDTO.getAmount())
-                .concurrency(transactionDTO.getConcurrency())
-                .timestamp(transactionDTO.getTimestamp())
-                .location(transactionDTO.getLocation())
+                .id(transactionDto.getId())
+                .senderAccountId(transactionDto.getSenderAccountId())
+                .receiverAccountId(transactionDto.getReceiverAccountId())
+                .amount(transactionDto.getAmount())
+                .concurrency(transactionDto.getConcurrency())
+                .timestamp(transactionDto.getTimestamp())
+                .location(transactionDto.getLocation())
                 .build();
     }
 }

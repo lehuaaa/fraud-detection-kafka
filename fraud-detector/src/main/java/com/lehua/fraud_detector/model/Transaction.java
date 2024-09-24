@@ -1,6 +1,6 @@
 package com.lehua.fraud_detector.model;
 
-import com.lehua.common.enums.Concurrency;
+import com.lehua.common.model.Concurrency;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
