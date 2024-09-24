@@ -18,9 +18,9 @@
 	<description>Cloud computing kafka project</description>
 
 	<modules>
+		<module>common</module>
 		<module>transaction-api</module>
         <module>fraud-detector</module>
-        <module>common</module>
     </modules>
 
 	<packaging>pom</packaging>
