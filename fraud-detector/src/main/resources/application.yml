@@ -14,19 +14,17 @@ spring:
           identification:
             algorithm: ""
     consumer:
-      group-id: detector
+      group-id: consumer
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "*"
   datasource:
-    url: jdbc:postgresql://localhost:5432/fraud-detector
-    username: ${POSTGRES_USERNAME}
+    url: jdbc:postgresql://localhost:5432/fraud-detection
+    username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: create
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
