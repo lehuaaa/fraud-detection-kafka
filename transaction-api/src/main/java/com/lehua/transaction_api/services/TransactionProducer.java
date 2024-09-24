@@ -1,4 +1,4 @@
-package com.lehua.transaction_api;
+package com.lehua.transaction_api.services;
 
 import com.lehua.common.dtos.TransactionDTO;
 import org.slf4j.Logger;
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class TransactionsProducer {
+public class TransactionProducer {
 
     private final KafkaTemplate<String, TransactionDTO> kafkaTemplate;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TransactionsProducer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransactionProducer.class);
 
-    public TransactionsProducer(KafkaTemplate<String, TransactionDTO> kafkaTemplate) {
+    public TransactionProducer(KafkaTemplate<String, TransactionDTO> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 

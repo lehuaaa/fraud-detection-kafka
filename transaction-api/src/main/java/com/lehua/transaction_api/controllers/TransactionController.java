@@ -1,7 +1,8 @@
-package com.lehua.transaction_api;
+package com.lehua.transaction_api.controllers;
 
 
 import com.lehua.common.dtos.TransactionDTO;
+import com.lehua.transaction_api.services.TransactionProducer;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,17 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/transactions")
-public class TransactionsController {
+public class TransactionController {
 
-    private final TransactionsProducer transactionsProducer;
+    private final TransactionProducer transactionProducer;
 
-    public TransactionsController(TransactionsProducer transactionsProducer) {
-        this.transactionsProducer = transactionsProducer;
+    public TransactionController(TransactionProducer transactionProducer) {
+        this.transactionProducer = transactionProducer;
     }
 
     @PostMapping
     public ResponseEntity<String> publishTransaction(@Valid @RequestBody TransactionDTO transaction) {
-        transactionsProducer.sendMessage(transaction);
+        transactionProducer.sendMessage(transaction);
         return new ResponseEntity<>("Transaction successfully published", HttpStatus.CREATED);
     }
 }
