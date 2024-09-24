@@ -1,7 +1,6 @@
-package com.lehua.common.dtos;
+package com.lehua.common.model;
 
 
-import com.lehua.common.enums.Concurrency;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -12,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @ToString
-public class TransactionDTO {
+public class TransactionDto {
 
     @NotBlank(message = "transaction id is mandatory")
     @Size(
