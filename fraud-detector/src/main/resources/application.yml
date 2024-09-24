@@ -22,8 +22,8 @@ spring:
         spring.json.trusted.packages: "*"
   datasource:
     url: jdbc:postgresql://localhost:5432/fraud-detector
-    username: postgres ${POSTGRES_USERNAME}
-    password: root ${POSTGRES_PASSWORD}
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
