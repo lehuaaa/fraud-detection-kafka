@@ -198,8 +198,8 @@ services:
 
   transaction-api:
     build:
-      context: ../transaction-api
-      dockerfile: Dockerfile
+      context: transaction-api
+      dockerfile: transaction-api/Dockerfile
     container_name: transaction-api
     hostname: transaction-api
     ports:
@@ -225,8 +225,8 @@ services:
 
   fraud-detector:
     build:
-      context: ../fraud-detector
-      dockerfile: Dockerfile
+      context: fraud-detector
+      dockerfile: fraud-detector/Dockerfile
     container_name: fraud-detector
     hostname: fraud-detector
     environment:
