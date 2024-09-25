@@ -15,10 +15,10 @@ services:
       - kafka-network
     healthcheck:
       test: [ "CMD", "nc", "-z", "localhost", "2181" ]
-      interval: 30s
-      retries: 3
       start_period: 30s
+      interval: 30s
       timeout: 10s
+      retries: 3
 
 
   zookeeper-2:
@@ -35,10 +35,10 @@ services:
       - kafka-network
     healthcheck:
       test: [ "CMD", "nc", "-z", "localhost", "2182" ]
-      interval: 30s
-      retries: 3
       start_period: 30s
+      interval: 30s
       timeout: 10s
+      retries: 3
 
 
   zookeeper-3:
@@ -55,10 +55,10 @@ services:
       - kafka-network
     healthcheck:
       test: [ "CMD", "nc", "-z", "localhost", "2183" ]
-      interval: 30s
-      retries: 3
       start_period: 30s
+      interval: 30s
       timeout: 10s
+      retries: 3
 
 
   kafka-1:
@@ -70,6 +70,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper-1:2181,zookeeper-2:2182,zookeeper-3:2183"
+      KAFKA_ZOOKEEPER_SESSION_TIMEOUT_MS: 60000
       KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-1:19092,EXTERNAL://localhost:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:SSL,EXTERNAL:SSL
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
@@ -94,10 +95,10 @@ services:
         condition: service_healthy
     healthcheck:
       test: [ "CMD", "nc", "-z", "localhost", "9092" ]
-      interval: 30s
-      retries: 3
       start_period: 30s
+      interval: 30s
       timeout: 10s
+      retries: 3
 
 
   kafka-2:
@@ -109,6 +110,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 2
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper-1:2181,zookeeper-2:2182,zookeeper-3:2183"
+      KAFKA_ZOOKEEPER_SESSION_TIMEOUT_MS: 60000
       KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-2:19093,EXTERNAL://localhost:9093
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:SSL,EXTERNAL:SSL
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
@@ -133,10 +135,10 @@ services:
         condition: service_healthy
     healthcheck:
       test: [ "CMD", "nc", "-z", "localhost", "9093" ]
-      interval: 30s
-      retries: 3
       start_period: 30s
+      interval: 30s
       timeout: 10s
+      retries: 3
 
 
   kafka-3:
@@ -148,6 +150,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 3
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper-1:2181,zookeeper-2:2182,zookeeper-3:2183"
+      KAFKA_ZOOKEEPER_SESSION_TIMEOUT_MS: 60000
       KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-3:19094,EXTERNAL://localhost:9094
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:SSL,EXTERNAL:SSL
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
@@ -172,10 +175,10 @@ services:
         condition: service_healthy
     healthcheck:
       test: [ "CMD", "nc", "-z", "localhost", "9094" ]
-      interval: 30s
-      retries: 3
       start_period: 30s
+      interval: 30s
       timeout: 10s
+      retries: 3
 
 
   postgres:
@@ -212,9 +215,12 @@ services:
     networks:
       - kafka-network
     depends_on:
-      - kafka-1
-      - kafka-2
-      - kafka-3
+      kafka-1:
+        condition: service_healthy
+      kafka-2:
+        condition: service_healthy
+      kafka-3:
+        condition: service_healthy
 
 
   fraud-detector:
@@ -237,8 +243,12 @@ services:
     networks:
       - kafka-network
     depends_on:
-      - transaction-api
-      - postgres
+      kafka-1:
+        condition: service_healthy
+      kafka-2:
+        condition: service_healthy
+      kafka-3:
+        condition: service_healthy
 
 
 networks:
