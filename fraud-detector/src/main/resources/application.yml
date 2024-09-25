@@ -1,11 +1,11 @@
 spring:
   kafka:
-    bootstrap-servers: ${BOOTSTRAP_SERVERS}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
     ssl:
-      trust-store-location: ${TRUSTSTORE_LOCATION}
-      trust-store-password: ${TRUSTSTORE_PASSWORD}
-      key-store-location: ${KEYSTORE_LOCATION}
-      key-store-password: ${KEYSTORE_PASSWORD}
+      trust-store-location: ${KAFKA_TRUSTSTORE_LOCATION}
+      trust-store-password: ${KAFKA_TRUSTSTORE_PASSWORD}
+      key-store-location: ${KAFKA_KEYSTORE_LOCATION}
+      key-store-password: ${KAFKA_KEYSTORE_PASSWORD}
     properties:
       security:
         protocol: "SSL"

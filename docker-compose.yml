@@ -205,11 +205,11 @@ services:
     ports:
       - 8080:8080
     environment:
-      BOOTSTRAP_SERVERS: kafka-1:19092,kafka-2:19093,kafka-3:19094
-      TRUSTSTORE_LOCATION: file:/app/secrets/transaction-api.truststore.jks
-      TRUSTSTORE_PASSWORD: ${TRANSACTION_API_TRUSTSTORE_PASSWORD}
-      KEYSTORE_LOCATION: file:/app/secrets/transaction-api.keystore.jks
-      KEYSTORE_PASSWORD: ${TRANSACTION_API_KEYSTORE_PASSWORD}
+      KAFKA_BOOTSTRAP_SERVERS: kafka-1:19092,kafka-2:19093,kafka-3:19094
+      KAFKA_TRUSTSTORE_LOCATION: file:/app/secrets/transaction-api.truststore.jks
+      KAFKA_TRUSTSTORE_PASSWORD: ${TRANSACTION_API_TRUSTSTORE_PASSWORD}
+      KAFKA_KEYSTORE_LOCATION: file:/app/secrets/transaction-api.keystore.jks
+      KAFKA_KEYSTORE_PASSWORD: ${TRANSACTION_API_KEYSTORE_PASSWORD}
     volumes:
       - ./secrets/transaction-api:/app/secrets
     networks:
@@ -230,11 +230,11 @@ services:
     container_name: fraud-detector
     hostname: fraud-detector
     environment:
-      BOOTSTRAP_SERVERS: kafka-1:19092,kafka-2:19093,kafka-3:19094
-      TRUSTSTORE_LOCATION: file:/app/secrets/fraud-detector.truststore.jks
-      TRUSTSTORE_PASSWORD: ${FRAUD_DETECTOR_TRUSTSTORE_PASSWORD}
-      KEYSTORE_LOCATION: file:/app/secrets/fraud-detector.keystore.jks
-      KEYSTORE_PASSWORD: ${FRAUD_DETECTOR_KEYSTORE_PASSWORD}
+      KAFKA_BOOTSTRAP_SERVERS: kafka-1:19092,kafka-2:19093,kafka-3:19094
+      KAFKA_TRUSTSTORE_LOCATION: file:/app/secrets/fraud-detector.truststore.jks
+      KAFKA_TRUSTSTORE_PASSWORD: ${FRAUD_DETECTOR_TRUSTSTORE_PASSWORD}
+      KAFKA_KEYSTORE_LOCATION: file:/app/secrets/fraud-detector.keystore.jks
+      KAFKA_KEYSTORE_PASSWORD: ${FRAUD_DETECTOR_KEYSTORE_PASSWORD}
       DATASOURCE_URL: jdbc:postgresql://postgres:5432/fraud-detection
       DATASOURCE_USER: ${POSTGRES_USER}
       DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
