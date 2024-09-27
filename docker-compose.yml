@@ -8,9 +8,16 @@ services:
     ports:
       - "2181:2181"
     environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_SERVERS: zookeeper-1:2888:3888;zookeeper-2:2888:3888;zookeeper-3:2888:3888
+      ZOOKEEPER_SSL_KEYSTORE_LOCATION: /var/private/ssl/zookeeper-1.keystore.jks
+      ZOOKEEPER_SSL_KEYSTORE_PASSWORD: ${ZOOKEEPER_1_KEYSTORE_PASSWORD}
+      ZOOKEEPER_SSL_TRUSTSTORE_LOCATION: /var/private/ssl/zookeeper-1.truststore.jks
+      ZOOKEEPER_SSL_TRUSTSTORE_PASSWORD: ${ZOOKEEPER_1_TRUSTSTORE_PASSWORD}
+      ZOOKEEPER_SSL_CLIENT_ENABLE: true
+    volumes:
+      - ./secrets/zookeeper-1:/var/private/ssl
     networks:
       - kafka-network
     healthcheck:
@@ -28,9 +35,16 @@ services:
     ports:
       - "2182:2182"
     environment:
-      ZOOKEEPER_CLIENT_PORT: 2182
       ZOOKEEPER_SERVER_ID: 2
+      ZOOKEEPER_CLIENT_PORT: 2182
       ZOOKEEPER_SERVERS: zookeeper-1:2888:3888;zookeeper-2:2888:3888;zookeeper-3:2888:3888
+      ZOOKEEPER_SSL_KEYSTORE_LOCATION: /var/private/ssl/zookeeper-2.keystore.jks
+      ZOOKEEPER_SSL_KEYSTORE_PASSWORD: ${ZOOKEEPER_2_KEYSTORE_PASSWORD}
+      ZOOKEEPER_SSL_TRUSTSTORE_LOCATION: /var/private/ssl/zookeeper-2.truststore.jks
+      ZOOKEEPER_SSL_TRUSTSTORE_PASSWORD: ${ZOOKEEPER_2_TRUSTSTORE_PASSWORD}
+      ZOOKEEPER_SSL_CLIENT_ENABLE: true
+    volumes:
+      - ./secrets/zookeeper-2:/var/private/ssl
     networks:
       - kafka-network
     healthcheck:
@@ -48,9 +62,16 @@ services:
     ports:
       - "2183:2183"
     environment:
-      ZOOKEEPER_CLIENT_PORT: 2183
       ZOOKEEPER_SERVER_ID: 3
+      ZOOKEEPER_CLIENT_PORT: 2183
       ZOOKEEPER_SERVERS: zookeeper-1:2888:3888;zookeeper-2:2888:3888;zookeeper-3:2888:3888
+      ZOOKEEPER_SSL_KEYSTORE_LOCATION: /var/private/ssl/zookeeper-3.keystore.jks
+      ZOOKEEPER_SSL_KEYSTORE_PASSWORD: ${ZOOKEEPER_3_KEYSTORE_PASSWORD}
+      ZOOKEEPER_SSL_TRUSTSTORE_LOCATION: /var/private/ssl/zookeeper-3.truststore.jks
+      ZOOKEEPER_SSL_TRUSTSTORE_PASSWORD: ${ZOOKEEPER_3_TRUSTSTORE_PASSWORD}
+      ZOOKEEPER_SSL_CLIENT_ENABLE: true
+    volumes:
+      - ./secrets/zookeeper-3:/var/private/ssl
     networks:
       - kafka-network
     healthcheck:
@@ -81,6 +102,11 @@ services:
       KAFKA_SSL_TRUSTSTORE_FILENAME: kafka-1.truststore.jks
       KAFKA_SSL_TRUSTSTORE_PASSWORD: ${KAFKA_1_TRUSTSTORE_PASSWORD}
       KAFKA_SSL_CLIENT_AUTH: required
+      KAFKA_ZOOKEEPER_SSL_CLIENT_ENABLE: true
+      KAFKA_ZOOKEEPER_SSL_KEYSTORE_LOCATION: /var/private/ssl/kafka-1.keystore.jks
+      KAFKA_ZOOKEEPER_SSL_KEYSTORE_PASSWORD: ${KAFKA_1_KEYSTORE_PASSWORD}
+      KAFKA_ZOOKEEPER_SSL_TRUSTSTORE_LOCATION: /var/private/ssl/kafka-1.truststore.jks
+      KAFKA_ZOOKEEPER_SSL_TRUSTSTORE_PASSWORD: ${KAFKA_1_TRUSTSTORE_PASSWORD}
       KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: ""
     volumes:
       - ./secrets/kafka-1:/var/private/ssl
@@ -121,6 +147,11 @@ services:
       KAFKA_SSL_TRUSTSTORE_FILENAME: kafka-2.truststore.jks
       KAFKA_SSL_TRUSTSTORE_PASSWORD: ${KAFKA_2_TRUSTSTORE_PASSWORD}
       KAFKA_SSL_CLIENT_AUTH: required
+      KAFKA_ZOOKEEPER_SSL_CLIENT_ENABLE: true
+      KAFKA_ZOOKEEPER_SSL_KEYSTORE_LOCATION: /var/private/ssl/kafka-2.keystore.jks
+      KAFKA_ZOOKEEPER_SSL_KEYSTORE_PASSWORD: ${KAFKA_2_KEYSTORE_PASSWORD}
+      KAFKA_ZOOKEEPER_SSL_TRUSTSTORE_LOCATION: /var/private/ssl/kafka-2.truststore.jks
+      KAFKA_ZOOKEEPER_SSL_TRUSTSTORE_PASSWORD: ${KAFKA_2_TRUSTSTORE_PASSWORD}
       KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: ""
     volumes:
       - ./secrets/kafka-2:/var/private/ssl
@@ -161,6 +192,11 @@ services:
       KAFKA_SSL_TRUSTSTORE_FILENAME: kafka-3.truststore.jks
       KAFKA_SSL_TRUSTSTORE_PASSWORD: ${KAFKA_3_TRUSTSTORE_PASSWORD}
       KAFKA_SSL_CLIENT_AUTH: required
+      KAFKA_ZOOKEEPER_SSL_CLIENT_ENABLE: true
+      KAFKA_ZOOKEEPER_SSL_KEYSTORE_LOCATION: /var/private/ssl/kafka-3.keystore.jks
+      KAFKA_ZOOKEEPER_SSL_KEYSTORE_PASSWORD: ${KAFKA_3_KEYSTORE_PASSWORD}
+      KAFKA_ZOOKEEPER_SSL_TRUSTSTORE_LOCATION: /var/private/ssl/kafka-3.truststore.jks
+      KAFKA_ZOOKEEPER_SSL_TRUSTSTORE_PASSWORD: ${KAFKA_3_TRUSTSTORE_PASSWORD}
       KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: ""
     volumes:
       - ./secrets/kafka-3:/var/private/ssl
