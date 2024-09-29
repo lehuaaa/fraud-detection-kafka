@@ -12,7 +12,7 @@ import java.net.http.HttpResponse;
 
 public class TransactionGeneratorApplication {
 
-    private final static String BASE_URL = "http://localhost:8080/api/transactions";
+    private final static String BASE_URL = "http://transaction-api:8080/api/transactions";
 
     public static void main(String[] args) throws InterruptedException, IOException {
         HttpClient client = HttpClient.newHttpClient();

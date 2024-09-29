@@ -293,6 +293,18 @@ services:
         condition: service_healthy
 
 
+  transaction-generator:
+    build:
+      context: transaction-generator
+      dockerfile: Dockerfile
+    container_name: transaction-generator
+    hostname: transaction-generator
+    networks:
+      - kafka-network
+    depends_on:
+      - transaction-api
+
+
 networks:
   kafka-network:
     driver: bridge
