@@ -21,7 +21,8 @@
 		<module>common</module>
 		<module>transaction-api</module>
 		<module>fraud-detector</module>
-	</modules>
+        <module>transaction-generator</module>
+    </modules>
 
 	<packaging>pom</packaging>
 
