@@ -4,7 +4,6 @@ package com.lehua.common.model;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -41,8 +40,6 @@ public class TransactionDto {
     private double amount;
 
     private Concurrency concurrency;
-
-    private LocalDateTime timestamp;
 
     @NotBlank(message = "Location is mandatory")
     private String location;

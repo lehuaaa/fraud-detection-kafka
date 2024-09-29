@@ -31,8 +31,6 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     private Concurrency concurrency;
 
-    private LocalDateTime timestamp;
-
     private String location;
 
 }

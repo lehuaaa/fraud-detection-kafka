@@ -18,7 +18,6 @@ public class TransactionMapper {
                 .receiverAccountId(transactionDto.getReceiverAccountId())
                 .amount(transactionDto.getAmount())
                 .concurrency(transactionDto.getConcurrency())
-                .timestamp(transactionDto.getTimestamp())
                 .location(transactionDto.getLocation())
                 .build();
     }
