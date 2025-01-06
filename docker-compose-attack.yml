@@ -1,0 +1,36 @@
+services:
+
+
+  malicious-kafka-broker:
+    image: confluentinc/cp-kafka:latest
+    container_name: malicious-kafka-broker
+    hostname: malicious-kafka-broker
+    ports:
+      - "9095:9095"
+    environment:
+      KAFKA_BROKER_ID: 4
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper-1:2281,zookeeper-2:2282,zookeeper-3:2283"
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://malicious-kafka-broker:19095,EXTERNAL://localhost:9095
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:SSL,EXTERNAL:SSL
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_SSL_CLIENT_AUTH: required
+      KAFKA_SSL_KEYSTORE_LOCATION: /var/private/ssl/malicious-kafka-broker.keystore.jks
+      KAFKA_SSL_KEYSTORE_PASSWORD: ${MALICIOUS_KAFKA_BROKER_KEYSTORE_PASSWORD}
+      KAFKA_SSL_TRUSTSTORE_LOCATION: /var/private/ssl/malicious-kafka-broker.truststore.jks
+      KAFKA_SSL_TRUSTSTORE_PASSWORD: ${MALICIOUS_KAFKA_BROKER_TRUSTSTORE_PASSWORD}
+      KAFKA_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: ""
+      KAFKA_ZOOKEEPER_SSL_CLIENT_ENABLE: 'true'
+      KAFKA_ZOOKEEPER_CLIENT_CNXN_SOCKET: org.apache.zookeeper.ClientCnxnSocketNetty
+      KAFKA_ZOOKEEPER_SSL_KEYSTORE_LOCATION: /var/private/ssl/malicious-kafka-broker.keystore.jks
+      KAFKA_ZOOKEEPER_SSL_KEYSTORE_PASSWORD: ${MALICIOUS_KAFKA_BROKER_KEYSTORE_PASSWORD}
+      KAFKA_ZOOKEEPER_SSL_TRUSTSTORE_LOCATION: /var/private/ssl/malicious-kafka-broker.truststore.jks
+      KAFKA_ZOOKEEPER_SSL_TRUSTSTORE_PASSWORD: ${MALICIOUS_KAFKA_BROKER_TRUSTSTORE_PASSWORD}
+      KAFKA_ZOOKEEPER_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: ""
+    volumes:
+      - ./secrets/malicious-kafka-broker:/var/private/ssl
+    networks:
+      - kafka-network
+
+networks:
+  kafka-network:
+    external: true
