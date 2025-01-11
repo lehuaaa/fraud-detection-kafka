@@ -22,6 +22,7 @@
 		<module>transaction-api</module>
 		<module>fraud-detector</module>
         <module>transaction-generator</module>
+		<module>malicious-subscriber</module>
     </modules>
 
 	<packaging>pom</packaging>

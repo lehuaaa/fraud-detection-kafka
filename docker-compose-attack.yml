@@ -31,6 +31,25 @@ services:
     networks:
       - kafka-network
 
+
+  malicious-subscriber:
+    build:
+      context: malicious-subscriber
+      dockerfile: Dockerfile
+    container_name: malicious-subscriber
+    hostname: malicious-subscriber
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka-1:19092,kafka-2:19093,kafka-3:19094
+      KAFKA_TRUSTSTORE_LOCATION: file:/app/secrets/malicious-subscriber.truststore.jks
+      KAFKA_TRUSTSTORE_PASSWORD: ${MALICIOUS_SUBSCRIBER_TRUSTSTORE_PASSWORD}
+      KAFKA_KEYSTORE_LOCATION: file:/app/secrets/malicious-subscriber.keystore.jks
+      KAFKA_KEYSTORE_PASSWORD: ${MALICIOUS_SUBSCRIBER_KEYSTORE_PASSWORD}
+    volumes:
+      - ./secrets/malicious-subscriber:/app/secrets
+    networks:
+      - kafka-network
+
+
 networks:
   kafka-network:
     external: true
