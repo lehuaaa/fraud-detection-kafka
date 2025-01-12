@@ -5,10 +5,12 @@ import com.lehua.common.model.Concurrency;
 import com.lehua.common.model.TransactionDto;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.net.http.HttpTimeoutException;
 
 public class TransactionGeneratorApplication {
 
@@ -30,8 +32,12 @@ public class TransactionGeneratorApplication {
             Thread.sleep(5000);
 
             System.out.println("Sending transaction...");
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println("Status code: " + response.statusCode());
+            try {
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                System.out.println("Status code: " + response.statusCode());
+            } catch (ConnectException | HttpTimeoutException e) {
+                System.out.println("Connection error ");
+            }
         }
 
     }
